@@ -14,4 +14,4 @@
 12. RealtimeBlurView
 13. LeakCanary
 14. Bugly
-15. EasyPermissions"# KotlinApp" 
+15. EasyPermissions

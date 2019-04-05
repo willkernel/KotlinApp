@@ -1,0 +1,108 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.willkernel.kotlinapp"
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        renderscriptSupportModeEnabled true
+        renderscriptTargetApi 19
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+//configurations.all {
+//    resolutionStrategy {
+//        force 'com.android.support:support-v4:28.0.0'
+//        force 'com.android.support:design:28.0.0'
+//    }
+//}
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.google.android:flexbox:1.1.0'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.6'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava:2.5.0'
+    implementation 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.10.0'
+    implementation 'com.trello.rxlifecycle2:rxlifecycle:2.1.0'
+    implementation 'com.trello.rxlifecycle2:rxlifecycle-components:2.1.0'
+    //模糊透明 View
+    implementation 'com.github.mmin18:realtimeblurview:1.1.0'
+    // 底部菜单
+    implementation('com.flyco.tablayout:FlycoTabLayout_Lib:2.1.0@aar') {
+        exclude group: 'com.android.support', module: 'support-v4'
+    }
+    //smartRefreshLayout 下拉刷新
+    implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.3'
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.3'
+    //Banner
+    implementation 'cn.bingoogolapple:bga-banner:2.2.4@aar'
+    //glide
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    // Skip this if you don't want to use integration libraries or configure Glide.
+    kapt 'com.github.bumptech.glide:compiler:4.9.0'
+
+    // 衔接 Retrofit & RxJava
+    // 此处一定要注意使用RxJava2的版本
+    implementation 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
+
+    //Logger
+    implementation 'com.orhanobut:logger:2.1.1'
+    //leakCanary
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
+    //腾讯 bugly
+    implementation 'com.tencent.bugly:crashreport:2.6.6.1'
+    //运行时权限
+    implementation 'pub.devrel:easypermissions:1.2.0'
+    // 视屏播放器
+    implementation 'com.shuyu:GSYVideoPlayer:2.1.1'
+    // Support库
+    implementation 'com.android.support:support-v4:28.0.0'
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support:recyclerview-v7:28.0.0'
+    implementation 'com.android.support:design:28.0.0'
+
+
+    // dagger 2 的配置
+//    android-apt 是 Gradle 编译器的插件，根据其官方文档，主要两个目的：
+//    编译时使用该工具，最终打包时不会将该插件打入到 apk 中。
+//    能够根据设置的源路径，在编译时期生成相应代码
+    implementation 'com.google.dagger:dagger:2.17'
+    kapt 'com.google.dagger:dagger-compiler:2.17'
+//    kapt 'org.glassfish:javax.annotation:10.0-b28'// 添加java 注解库
+
+
+    implementation 'com.hannesdorfmann.mosby3:mvi:3.1.1' // Model-View-Intent
+    // or
+    implementation 'com.hannesdorfmann.mosby3:mvp:3.1.1' // Plain MVP
+    // or
+    implementation 'com.hannesdorfmann.mosby3:viewstate:3.1.1' // MVP + ViewState support
+//    testImplementation 'junit:junit:4.12'
+//    androidTestImplementation 'androidx.test:runner:1.1.2-alpha02'
+//    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0-alpha02'
+}

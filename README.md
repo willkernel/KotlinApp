@@ -16,6 +16,4 @@
 14. Bugly
 15. EasyPermissions
 
-<video id="video" controls="" preload="none">
-      <source id="mp4" src="./preview.mp4" type="video/mp4">
-</video>
+![demo](./preview.gif)

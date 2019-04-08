@@ -183,6 +183,7 @@ class StatusBarUtil {
         /**
          * 设置MIUI6+的状态栏是否为darkMode,darkMode时候字体颜色及icon变黑
          * http://dev.xiaomi.com/doc/p=4769/
+         * https://dev.mi.com/console/doc/detail?pId=1159
          */
         fun darkModeForMIUI6(window: Window, darkmode: Boolean): Boolean {
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);

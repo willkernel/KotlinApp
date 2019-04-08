@@ -10,7 +10,7 @@ class Constants {
         val BUNDLE_CATEGORY_DATA = "category_data"
 
         //腾讯 Bugly APP id
-        val BUGLY_APPID = "176aad0d9e"
+        val BUGLY_APPID = "1111111"
 
 
         //sp 存储的文件名

@@ -125,7 +125,7 @@ public class MultipleStatusView extends RelativeLayout {
         mViewStatus = STATUS_EMPTY;
         if (null == mEmptyView) {
             mEmptyView = view;
-            View emptyRetryView = mEmptyView.findViewById(R.id.empty_retry_view);
+            View emptyRetryView = mEmptyView.findViewById(R.id.empty_retry);
             if (null != mOnRetryClickListener && null != emptyRetryView) {
                 emptyRetryView.setOnClickListener(mOnRetryClickListener);
             }

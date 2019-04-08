@@ -43,7 +43,8 @@
             android:src="@mipmap/img_avatar"
             app:borderColor="@color/color_gray"
             app:borderWidth="2dp"
-            app:type="circle" />
+            app:rectRoundRadius="4dp"
+            app:type="rounded_rect" />
     </LinearLayout>
 
     <TextView

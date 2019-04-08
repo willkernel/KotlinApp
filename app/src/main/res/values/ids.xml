@@ -6,7 +6,7 @@
     <item name="content_view" type="id"/>
     <item name="no_network_view" type="id"/>
 
-    <item name="empty_retry_view" type="id"/>
+    <item name="empty_retry" type="id"/>
     <item name="error_retry_view" type="id"/>
     <item name="no_network_retry_view" type="id"/>
 

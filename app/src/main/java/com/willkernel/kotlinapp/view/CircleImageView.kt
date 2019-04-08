@@ -13,10 +13,10 @@ import com.willkernel.kotlinapp.R
 /**TODO watch*/
 class CircleImageView(context: Context, attrs: AttributeSet) : AppCompatImageView(context, attrs) {
 
-    private val mType: Int
-    private val mBorderColor: Int
-    private val mBorderWidth: Int
-    private val mRectRoundRadius: Int
+    private var mType: Int
+    private var mBorderColor: Int
+    private var mBorderWidth: Int
+    private var mRectRoundRadius: Int
 
     private val mPaintBitmap = Paint(Paint.ANTI_ALIAS_FLAG)
     private val mPaintBorder = Paint(Paint.ANTI_ALIAS_FLAG)
@@ -33,8 +33,9 @@ class CircleImageView(context: Context, attrs: AttributeSet) : AppCompatImageVie
         val ta = context.obtainStyledAttributes(attrs, R.styleable.CircleImageView)
         mType = ta.getInt(R.styleable.CircleImageView_type, DEFAULT_TYPE)
         mBorderColor = ta.getColor(R.styleable.CircleImageView_borderColor, DEFAULT_BORDER_COLOR)
-        mBorderWidth = ta.getDimensionPixelSize(R.styleable.CircleImageView_borderWidth, dip2px(DEFAULT_BORDER_WIDTH))
-        mRectRoundRadius = ta.getDimensionPixelSize(R.styleable.CircleImageView_rectRoundRadius, dip2px(DEFAULT_RECT_ROUND_RADIUS))
+        mBorderWidth = ta.getDimensionPixelSize(R.styleable.CircleImageView_borderWidth, DEFAULT_BORDER_WIDTH)
+        mRectRoundRadius =
+            ta.getDimensionPixelSize(R.styleable.CircleImageView_rectRoundRadius, DEFAULT_RECT_ROUND_RADIUS)
         ta.recycle()
     }
 
@@ -50,12 +51,17 @@ class CircleImageView(context: Context, attrs: AttributeSet) : AppCompatImageVie
             val halfBorderWidth = mBorderWidth / 2.0f
             val doubleBorderWidth = (mBorderWidth * 2).toFloat()
 
+            //当前图片和原始图不一样,或者没有设置shader
             if (mShader == null || rawBitmap != mRawBitmap) {
                 mRawBitmap = rawBitmap
                 mShader = BitmapShader(mRawBitmap!!, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP)
             }
             if (mShader != null) {
-                mMatrix.setScale((dstWidth - doubleBorderWidth) / rawBitmap.width, (dstHeight - doubleBorderWidth) / rawBitmap.height)
+                //图片缩放转换
+                mMatrix.setScale(
+                    (dstWidth - doubleBorderWidth) / rawBitmap.width,
+                    (dstHeight - doubleBorderWidth) / rawBitmap.height
+                )
                 mShader!!.setLocalMatrix(mMatrix)
             }
 
@@ -66,17 +72,26 @@ class CircleImageView(context: Context, attrs: AttributeSet) : AppCompatImageVie
 
             if (mType == TYPE_CIRCLE) {
                 val radius = viewMinSize / 2.0f
+                //外边框,圆心为view中心,半径R= viewSize/2-borderWidth/2
                 canvas.drawCircle(radius, radius, radius - halfBorderWidth, mPaintBorder)
+                //边框画完之后,需要平移画布到新的位置,大小为边框的长度
                 canvas.translate(mBorderWidth.toFloat(), mBorderWidth.toFloat())
+                //画内容
                 canvas.drawCircle(radius - mBorderWidth, radius - mBorderWidth, radius - mBorderWidth, mPaintBitmap)
             } else if (mType == TYPE_ROUNDED_RECT) {
-                mRectBorder.set(halfBorderWidth, halfBorderWidth, dstWidth - halfBorderWidth, dstHeight - halfBorderWidth)
-                mRectBitmap.set(0.0f, 0.0f, dstWidth - doubleBorderWidth, dstHeight - doubleBorderWidth)
-                val borderRadius = if (mRectRoundRadius - halfBorderWidth > 0.0f) mRectRoundRadius - halfBorderWidth else 0.0f
-                val bitmapRadius = if (mRectRoundRadius - mBorderWidth > 0.0f) mRectRoundRadius - mBorderWidth else 0.0f
+                mRectBorder.set(
+                    halfBorderWidth,
+                    halfBorderWidth,
+                    dstWidth - halfBorderWidth,
+                    dstHeight - halfBorderWidth
+                )
+                mRectBitmap.set(doubleBorderWidth, doubleBorderWidth, dstWidth - doubleBorderWidth, dstHeight - doubleBorderWidth)
+                val borderRadius =
+                    if (mRectRoundRadius - halfBorderWidth > 0.0f) mRectRoundRadius - halfBorderWidth else 0.0f
+                val bitmapRadius = if (mRectRoundRadius - mBorderWidth > 0.0f) (mRectRoundRadius - mBorderWidth).toFloat() else 0.0f
                 canvas.drawRoundRect(mRectBorder, borderRadius, borderRadius, mPaintBorder)
                 canvas.translate(mBorderWidth.toFloat(), mBorderWidth.toFloat())
-                canvas.drawRoundRect(mRectBitmap, bitmapRadius as Float, bitmapRadius, mPaintBitmap)
+                canvas.drawRoundRect(mRectBitmap, bitmapRadius, bitmapRadius, mPaintBitmap)
             }
         } else {
             super.onDraw(canvas)
@@ -89,19 +104,20 @@ class CircleImageView(context: Context, attrs: AttributeSet) : AppCompatImageVie
     }
 
     private fun getBitmap(drawable: Drawable): Bitmap? {
-        if (drawable is BitmapDrawable) {
-            return drawable.bitmap
-        } else if (drawable is ColorDrawable) {
-            val rect = drawable.getBounds()
-            val width = rect.right - rect.left
-            val height = rect.bottom - rect.top
-            val color = drawable.color
-            val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
-            val canvas = Canvas(bitmap)
-            canvas.drawARGB(Color.alpha(color), Color.red(color), Color.green(color), Color.blue(color))
-            return bitmap
-        } else {
-            return null
+        return when (drawable) {
+            is BitmapDrawable -> drawable.bitmap
+            is ColorDrawable -> {
+                val color = drawable.color
+                val rect = drawable.bounds
+                val width = rect.right - rect.left
+                val height = rect.bottom - rect.top
+                val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+
+                val canvas = Canvas(bitmap)
+                canvas.drawARGB(Color.alpha(color), Color.red(color), Color.green(color), Color.blue(color))
+                bitmap
+            }
+            else -> null
         }
     }
 

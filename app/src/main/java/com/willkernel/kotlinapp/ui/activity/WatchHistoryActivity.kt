@@ -32,11 +32,13 @@ class WatchHistoryActivity : BaseActivity() {
         Arrays.sort(keys)
         val keyLength = keys.size
         //这里计算 如果历史记录条数是大于 可以显示的最大条数，则用最大条数做循环条件，防止历史记录条数-最大条数为负值，数组越界
-        val hisLength = if (keyLength > HISTORY_MAX) HISTORY_MAX else keyLength
+        val hisLength = Math.min(HISTORY_MAX, keyLength)
         // 反序列化和遍历 添加观看的历史记录
         (1..hisLength).mapTo(watchList) {
-            WatchHistoryUtils.getObject(Constants.FILE_WATCH_HISTORY_NAME, MyApplication.context,
-                keys[keyLength - it] as String) as HomeBean.Issue.Item
+            WatchHistoryUtils.getObject(
+                Constants.FILE_WATCH_HISTORY_NAME, MyApplication.context,
+                keys[keyLength - it] as String
+            ) as HomeBean.Issue.Item
         }
 
         return watchList

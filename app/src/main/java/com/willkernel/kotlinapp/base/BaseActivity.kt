@@ -32,7 +32,8 @@ abstract class BaseActivity : AppCompatActivity(), EasyPermissions.PermissionCal
      * 例如 asList(1, 2, 3)，或者，如果我们已经有一个数组并希望将其内容传给该函数，我们使用伸展（spread）操作符（在数组前面加 *）*/
     override fun onResume() {
         super.onResume()
-        val permissions = arrayOf(Manifest.permission.READ_PHONE_STATE, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        val permissions = arrayOf(Manifest.permission.READ_PHONE_STATE, Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.MODIFY_AUDIO_SETTINGS,Manifest.permission.VIBRATE)
         EasyPermissions.requestPermissions(this, "申请权限", 0, *permissions)
     }
 

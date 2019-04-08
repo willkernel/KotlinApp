@@ -1,5 +1,6 @@
 package com.willkernel.kotlinapp.ui.activity
 
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.FragmentTransaction
 import com.flyco.tablayout.listener.CustomTabEntity
@@ -10,6 +11,7 @@ import com.willkernel.kotlinapp.ui.fragment.DiscoveryFragment
 import com.willkernel.kotlinapp.ui.fragment.HomeFragment
 import com.willkernel.kotlinapp.ui.fragment.HotFragment
 import com.willkernel.kotlinapp.ui.fragment.MineFragment
+import com.willkernel.kotlinapp.utils.NotificationUtils
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
@@ -56,6 +58,13 @@ class MainActivity : BaseActivity() {
     override fun initView() {
         tab_layout.currentTab = mIndex
         switchFragment(mIndex)
+
+        tab_layout.postDelayed({
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                NotificationUtils.showTextNotification(this)
+            }
+            NotificationUtils.openChannelSetting(NotificationUtils.CHANNEL_ID,this)
+        }, 2 * 1000)
     }
 
 

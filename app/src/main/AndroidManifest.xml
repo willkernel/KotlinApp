@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.willkernel.kotlinapp">
 
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.FLASHLIGHT"/>
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <!-- 获取GSM网络信息状态，如当前的网络连接是否有效 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
@@ -48,7 +51,11 @@
         <activity android:name=".ui.activity.VideoDetailActivity"
                   android:configChanges="orientation|keyboardHidden|screenSize"
         />
-        <activity android:name=".ui.activity.WatchHistoryActivity"/>
+        <activity android:name=".ui.activity.WatchHistoryActivity"
+                  android:parentActivityName=".ui.activity.MainActivity">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                       android:value=".ui.activity.MainActivity"/>
+        </activity>
     </application>
 
 </manifest>

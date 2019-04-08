@@ -6,6 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <!--<item name="android:windowTranslucentStatus">true</item>-->
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -41,18 +42,18 @@
     <!-- loadingView-->
     <declare-styleable name="LoadingView">
         <!--  设置外面进度条的半径 -->
-        <attr name="outerCircleRadius" format="dimension|reference" />
+        <attr name="outerCircleRadius" format="dimension|reference"/>
         <!--  设置外面进度条的颜色 -->
-        <attr name="outerCircleColor" format="color|reference" />
+        <attr name="outerCircleColor" format="color|reference"/>
         <!--  设置三角形外接圆的半径 -->
-        <attr name="innerTriangleRadius" format="dimension|reference" />
+        <attr name="innerTriangleRadius" format="dimension|reference"/>
         <!--  设置三角形颜色 -->
-        <attr name="innerTriangleColor" format="color|reference" />
+        <attr name="innerTriangleColor" format="color|reference"/>
         <!--  设置背景的颜色 -->
-        <attr name="backgroundColor" format="color|reference" />
+        <attr name="backgroundColor" format="color|reference"/>
         <!--  设置是否需要背景 -->
-        <attr name="isNeedBackground" format="boolean" />
-        <attr name="strokeWidth" format="dimension|reference" />
+        <attr name="isNeedBackground" format="boolean"/>
+        <attr name="strokeWidth" format="dimension|reference"/>
     </declare-styleable>
     <style name="MultipleStatusView"/>
     <style name="MultipleStatusView.Content">

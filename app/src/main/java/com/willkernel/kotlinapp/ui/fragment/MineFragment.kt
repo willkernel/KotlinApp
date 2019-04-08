@@ -6,6 +6,7 @@ import com.willkernel.kotlinapp.Constants
 import com.willkernel.kotlinapp.R
 import com.willkernel.kotlinapp.base.BaseFragment
 import com.willkernel.kotlinapp.ui.activity.WatchHistoryActivity
+import com.willkernel.kotlinapp.utils.StatusBarUtil
 import kotlinx.android.synthetic.main.fragment_mine.*
 
 
@@ -24,6 +25,10 @@ class MineFragment : BaseFragment() {
     override fun initView() {
         tv_watch_history.setOnClickListener {
             startActivity(Intent(activity, WatchHistoryActivity::class.java))
+        }
+        activity?.let {
+            StatusBarUtil.darkMode(it)
+            StatusBarUtil.setPaddingSmart(it,toolbar)
         }
     }
 

@@ -6,6 +6,8 @@ import com.willkernel.kotlinapp.R
 import com.willkernel.kotlinapp.base.BaseFragment
 import com.willkernel.kotlinapp.mvp.contract.HomeContract
 import com.willkernel.kotlinapp.mvp.model.HomeBean
+import com.willkernel.kotlinapp.utils.StatusBarUtil
+import kotlinx.android.synthetic.main.fragment_hot.*
 
 
 class HotFragment : BaseFragment(), HomeContract.View {
@@ -18,6 +20,10 @@ class HotFragment : BaseFragment(), HomeContract.View {
     }
 
     override fun initView() {
+        activity?.let {
+            StatusBarUtil.darkMode(it)
+            StatusBarUtil.setPaddingSmart(it,toolbar_hot)
+        }
     }
 
     override fun lazyLoad() {

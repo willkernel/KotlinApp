@@ -86,7 +86,7 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'com.android.support:recyclerview-v7:28.0.0'
     implementation 'com.android.support:design:28.0.0'
-
+    implementation 'com.android.support:support-annotations:28.0.0'
 
     // dagger 2 的配置
 //    android-apt 是 Gradle 编译器的插件，根据其官方文档，主要两个目的：

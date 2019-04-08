@@ -21,7 +21,7 @@ import com.willkernel.kotlinapp.mvp.presenter.HomePresenter
 import com.willkernel.kotlinapp.ui.activity.SearchActivity
 import com.willkernel.kotlinapp.ui.adapter.HomeAdapter
 import com.willkernel.kotlinapp.utils.AppUtils
-import com.willkernel.kotlinapp.view.MultipleStatusView
+import com.willkernel.kotlinapp.utils.StatusBarUtil
 import kotlinx.android.synthetic.main.fragment_home.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -132,6 +132,10 @@ class HomeFragment : BaseFragment(), HomeContract.View {
         })
         iv_search.setOnClickListener {
             openSearchActivity()
+        }
+        activity?.let {
+            StatusBarUtil.darkMode(it)
+            StatusBarUtil.setPaddingSmart(it,toolbar)
         }
     }
 

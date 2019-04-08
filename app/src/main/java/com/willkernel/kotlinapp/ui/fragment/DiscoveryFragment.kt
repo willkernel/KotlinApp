@@ -6,6 +6,7 @@ import com.willkernel.kotlinapp.Constants
 import com.willkernel.kotlinapp.R
 import com.willkernel.kotlinapp.base.BaseFragment
 import com.willkernel.kotlinapp.ui.adapter.BaseFragmentAdapter
+import com.willkernel.kotlinapp.utils.StatusBarUtil
 import kotlinx.android.synthetic.main.fragment_hot.*
 
 
@@ -19,6 +20,11 @@ class DiscoveryFragment : BaseFragment() {
     }
 
     override fun initView() {
+        activity?.let {
+            StatusBarUtil.darkMode(it)
+            StatusBarUtil.setPaddingSmart(it,toolbar_hot)
+        }
+
         tv_header_title_hot.text=mTitle
         tabList.add("关注")
         tabList.add("分类")

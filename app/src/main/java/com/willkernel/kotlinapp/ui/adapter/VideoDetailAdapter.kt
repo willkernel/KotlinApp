@@ -39,6 +39,7 @@ class VideoDetailAdapter(mContext: Context, itemList: ArrayList<HomeBean.Issue.I
 //        this.mOnItemClickRelatedVideo = mItemRelatedVideo
 //    }
 
+    /**闭包*/
     private var mOnItemClickRelatedVideo: ((item: HomeBean.Issue.Item) -> Unit)? = null
     fun setOnItemDetailClick(mItem: (item: HomeBean.Issue.Item) -> Unit) {
         this.mOnItemClickRelatedVideo = mItem

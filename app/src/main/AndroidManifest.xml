@@ -49,8 +49,7 @@
                 android:screenOrientation="portrait"/>
         <activity android:name=".ui.activity.SearchActivity"/>
         <activity android:name=".ui.activity.VideoDetailActivity"
-                  android:configChanges="orientation|keyboardHidden|screenSize"
-        />
+                  android:configChanges="orientation|keyboardHidden|screenSize"/>
         <activity android:name=".ui.activity.WatchHistoryActivity"
                   android:parentActivityName=".ui.activity.MainActivity">
             <meta-data android:name="android.support.PARENT_ACTIVITY"
